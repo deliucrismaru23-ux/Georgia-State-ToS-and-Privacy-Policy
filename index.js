@@ -19,18 +19,17 @@ const client = new Client({
 // =========================
 // SLASH COMMAND
 // =========================
-
 const commands = [
   new SlashCommandBuilder()
     .setName('ad')
     .setDescription('Posts the server advertisement')
-].map(command => command.toJSON());
+].map(c => c.toJSON());
 
 const rest = new REST({ version: '10' }).setToken(process.env.TOKEN);
 
-(async () => {
+async function registerCommands() {
   try {
-    console.log('Registering slash commands...');
+    console.log("Registering slash commands...");
 
     await rest.put(
       Routes.applicationGuildCommands(
@@ -40,9 +39,13 @@ const rest = new REST({ version: '10' }).setToken(process.env.TOKEN);
       { body: commands }
     );
 
-    console.log('Slash commands registered.');
-  } catch (error) {
-    console.error(error);
+    console.log("Slash commands registered successfully!");
+  } catch (err) {
+    console.error("Command registration failed:", err);
+  }
+}
+
+registerCommands();
   }
 })();
 
