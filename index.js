@@ -17,7 +17,7 @@ const client = new Client({
 });
 
 // =========================
-// SLASH COMMAND
+// SLASH COMMANDS
 // =========================
 const commands = [
   new SlashCommandBuilder()
@@ -45,22 +45,16 @@ async function registerCommands() {
   }
 }
 
-registerCommands();
-  }
-})();
-
-// =========================
-// BOT READY
-// =========================
-
-client.once('ready', () => {
+client.once('ready', async () => {
   console.log(`${client.user.tag} is online!`);
+
+  // register commands AFTER bot is ready (more stable)
+  await registerCommands();
 });
 
 // =========================
 // COMMAND HANDLER
 // =========================
-
 client.on('interactionCreate', async interaction => {
   if (!interaction.isChatInputCommand()) return;
 
@@ -68,31 +62,18 @@ client.on('interactionCreate', async interaction => {
 
     const embed = new EmbedBuilder()
       .setTitle('🚔 Georgia State Roleplay')
-      .setDescription(
-`🔥 **Hello! Welcome to Georgia State Roleplay!**
-We are a new and realistic roleplay server.
+      .setDescription(`🔥 Welcome to Georgia State Roleplay!
 
-**What we have to offer!**
 ✅ Active Staff
 ✅ Daily Roleplays
 ✅ CAD/MDT
 ✅ Departments
 ✅ Professional Community
 
-📢 Join today and start roleplaying!
-
-**What we are looking for?**
-✅ You!
-✅ Donations to help the server grow!
-✅ New staff!
-✅ New members!
-✅ Boosters!`
-      )
+📢 Join today!`)
       .setColor('Blue')
       .setThumbnail(interaction.guild.iconURL())
-      .setFooter({
-        text: 'Georgia State Roleplay'
-      })
+      .setFooter({ text: 'Georgia State Roleplay' })
       .setTimestamp();
 
     const button = new ButtonBuilder()
