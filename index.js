@@ -76,8 +76,8 @@ We are a new and realistic ER:LC roleplay server.
 ## ✅ What We Offer
 🚓 Active Staff  
 📅 Daily Roleplays  
-💻 CAD / MDT  
-👮 Multiple Departments  
+👮 Multiple Departments 
+🚓Custom Liverys and Uniforms
 🌎 Professional Community  
 🎉 Friendly Members  
 🚨 Realistic Scenarios  
