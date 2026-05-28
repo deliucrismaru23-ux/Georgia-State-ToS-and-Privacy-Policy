@@ -17,16 +17,20 @@ const client = new Client({
 });
 
 // ======================
-// COMMANDS
+// SLASH COMMANDS
 // ======================
 const commands = [
+
+  // /ad
   new SlashCommandBuilder()
     .setName('ad')
     .setDescription('Posts the server advertisement'),
 
+  // /partnership-requirements
   new SlashCommandBuilder()
     .setName('partnership-requirements')
     .setDescription('Shows partnership requirements')
+
 ].map(command => command.toJSON());
 
 // ======================
@@ -50,42 +54,69 @@ async function registerCommands() {
 }
 
 // ======================
-// READY
+// READY EVENT
 // ======================
-client.once('ready', async () => {
+client.once('clientReady', async () => {
   console.log(`${client.user.tag} is online!`);
 
   await registerCommands();
 });
 
 // ======================
-// INTERACTIONS
+// INTERACTION HANDLER
 // ======================
 client.on('interactionCreate', async interaction => {
   if (!interaction.isChatInputCommand()) return;
 
+  // ======================
   // /ad
+  // ======================
   if (interaction.commandName === 'ad') {
 
     const embed = new EmbedBuilder()
       .setTitle('🚔 Georgia State Roleplay')
-      .setDescription(`
-🔥 Welcome to Georgia State Roleplay!
+      .setDescription(`🔥 Welcome to Georgia State Roleplay!
 
-✅ Active Staff
-✅ Daily Roleplays
-✅ CAD / MDT
-✅ Departments
-✅ Professional Community
+We are a realistic and professional ER:LC roleplay community looking for active members to help grow our server!
 
-🎮 Join today!
-`)
+━━━━━━━━━━━━━━━━━━
+
+## 🌟 What We Offer
+✅ Active & Professional Staff  
+✅ Daily Roleplays  
+✅ Custom Liveries  
+✅ Custom Uniforms  
+✅ Realistic Departments  
+✅ Friendly Community  
+✅ Organized Server  
+✅ High Quality Roleplay  
+✅ Fun & Active Members  
+
+━━━━━━━━━━━━━━━━━━
+
+## 👮 Departments
+🚓 Law Enforcement  
+🚑 Fire & EMS  
+🚗 Civilian Operations  
+📻 DOT  
+
+━━━━━━━━━━━━━━━━━━
+
+## 📢 We Are Hiring!
+✅ Staff Members  
+✅ Department Leadership  
+✅ Moderators  
+✅ Active Roleplayers  
+
+━━━━━━━━━━━━━━━━━━
+
+🎮 Join Georgia State Roleplay today and become part of an amazing ER:LC community!`)
       .setColor('Blue');
 
     const button = new ButtonBuilder()
       .setLabel('Join Server')
       .setStyle(ButtonStyle.Link)
-      .setURL('https://discord.gg/38CUPBaW');
+      .setURL('https://discord.gg/q9vnWpgS');
 
     const row = new ActionRowBuilder().addComponents(button);
 
@@ -95,7 +126,9 @@ client.on('interactionCreate', async interaction => {
     });
   }
 
+  // ======================
   // /partnership-requirements
+  // ======================
   if (interaction.commandName === 'partnership-requirements') {
 
     const embed = new EmbedBuilder()
