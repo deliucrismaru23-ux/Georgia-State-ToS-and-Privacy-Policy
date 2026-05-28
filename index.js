@@ -16,91 +16,71 @@ const client = new Client({
   intents: [GatewayIntentBits.Guilds]
 });
 
-// =========================
-// SLASH COMMAND SETUP
-// =========================
+// ======================
+// COMMANDS
+// ======================
 const commands = [
   new SlashCommandBuilder()
     .setName('ad')
-    .setDescription('Posts the server advertisement')
+    .setDescription('Posts the server advertisement'),
+
+  new SlashCommandBuilder()
+    .setName('partnership-requirements')
+    .setDescription('Shows partnership requirements')
 ].map(command => command.toJSON());
 
+// ======================
+// REGISTER COMMANDS
+// ======================
 const rest = new REST({ version: '10' }).setToken(process.env.TOKEN);
 
-// =========================
-// REGISTER COMMANDS
-// =========================
 async function registerCommands() {
   try {
-    console.log('Registering slash commands...');
+    console.log('Registering commands...');
 
     await rest.put(
-      Routes.applicationGuildCommands(
-        process.env.CLIENT_ID,
-        process.env.GUILD_ID
-      ),
+      Routes.applicationCommands(process.env.CLIENT_ID),
       { body: commands }
     );
 
-    console.log('Slash commands registered successfully!');
+    console.log('Commands registered!');
   } catch (error) {
     console.error(error);
   }
 }
 
-// =========================
-// BOT READY
-// =========================
+// ======================
+// READY
+// ======================
 client.once('ready', async () => {
   console.log(`${client.user.tag} is online!`);
 
   await registerCommands();
 });
 
-// =========================
-// COMMAND HANDLER
-// =========================
+// ======================
+// INTERACTIONS
+// ======================
 client.on('interactionCreate', async interaction => {
   if (!interaction.isChatInputCommand()) return;
 
+  // /ad
   if (interaction.commandName === 'ad') {
 
     const embed = new EmbedBuilder()
       .setTitle('🚔 Georgia State Roleplay')
       .setDescription(`
-🔥 **Hello! Welcome to Georgia State Roleplay!**
-We are a new and realistic ER:LC roleplay server.
+🔥 Welcome to Georgia State Roleplay!
 
-━━━━━━━━━━━━━━━━━━
+✅ Active Staff
+✅ Daily Roleplays
+✅ CAD / MDT
+✅ Departments
+✅ Professional Community
 
-## ✅ What We Offer
-🚓 Active Staff  
-📅 Daily Roleplays  
-👮 Multiple Departments 
-🚓Custom Liverys and Uniforms
-🌎 Professional Community  
-🎉 Friendly Members  
-🚨 Realistic Scenarios  
-
-━━━━━━━━━━━━━━━━━━
-
-## 📢 We Are Looking For
-✅ New Members  
-✅ Staff Members  
-✅ Boosters  
-✅ Department Leaders  
-✅ Active Roleplayers  
-
-━━━━━━━━━━━━━━━━━━
-
-🎮 Join today and start your RP journey with us!
+🎮 Join today!
 `)
-      .setColor('Blue')
-      .setThumbnail(interaction.guild.iconURL())
-      .setFooter({
-        text: 'Georgia State Roleplay'
-      })
-      .setTimestamp();
+      .setColor('Blue');
 
     const button = new ButtonBuilder()
       .setLabel('Join Server')
@@ -114,9 +94,28 @@ We are a new and realistic ER:LC roleplay server.
       components: [row]
     });
   }
+
+  // /partnership-requirements
+  if (interaction.commandName === 'partnership-requirements') {
+
+    const embed = new EmbedBuilder()
+      .setTitle('🤝 Partnership Requirements')
+      .setDescription(`
+✅ 50+ Members = 1 Representative
+✅ 50- Members = 2 Representatives
+✅ Active Community
+✅ Professional Staff
+✅ Must Advertise Our Server
+`)
+      .setColor('Purple');
+
+    await interaction.reply({
+      embeds: [embed]
+    });
+  }
 });
 
-// =========================
+// ======================
 // LOGIN
-// =========================
+// ======================
 client.login(process.env.TOKEN);
