@@ -192,8 +192,7 @@ console.error(error);
 // READY EVENT
 // =====================
 
-client.once('ready', async () => {
-
+client.once('clientReady', async () => {
 console.log(
 `✅ ${client.user.tag} online`
 );
