@@ -75,48 +75,64 @@ client.on('interactionCreate', async interaction => {
 
     const embed = new EmbedBuilder()
       .setTitle('🚔 Georgia State Roleplay')
-      .setDescription(`🔥 Welcome to Georgia State Roleplay!
+      .setDescription(`🚨🔥 GEORGIA STATE ROLEPLAY 🔥🚨
+The Ultimate ER:LC Roleplay Experience on Roblox
 
-We are a realistic and professional ER:LC roleplay community looking for active members to help grow our server!
+━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-━━━━━━━━━━━━━━━━━━
+🌟 Looking for realistic, action-packed roleplay?
+Join one of the fastest-growing Georgia-based ER:LC communities and experience professional, immersive emergency services roleplay like never before!
 
-## 🌟 What We Offer
-✅ Active & Professional Staff  
-✅ Daily Roleplays  
-✅ Custom Liveries  
-✅ Custom Uniforms  
-✅ Realistic Departments  
-✅ Friendly Community  
-✅ Organized Server  
-✅ High Quality Roleplay  
-✅ Fun & Active Members  
+💎 WHY PLAYERS CHOOSE US
 
-━━━━━━━━━━━━━━━━━━
+🚓 Active & Professional Staff Team
+👮 Multiple Departments Available
+• Law Enforcement
+• EMS
+• Fire Rescue
+• DOT
+• Coast Guard
+• And More!
 
-## 👮 Departments
-🚓 Law Enforcement  
-🚑 Fire & EMS  
-🚗 Civilian Operations  
-📻 DOT  
+🎨 Custom Liveries, Uniforms & Vehicles
+📅 Daily Roleplay Sessions & Community Events
+🚨 Realistic Scenarios & Procedures
+🤝 Friendly, Mature & Welcoming Community
+⭐ Professional Standards Without the Toxicity
 
-━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-## 📢 We Are Hiring!
-✅ Staff Members  
-✅ Department Leadership  
-✅ Moderators  
-✅ Active Roleplayers  
+📢 WE'RE RECRUITING NOW!
 
-━━━━━━━━━━━━━━━━━━
+🔥 Active Roleplayers
+Ready to create amazing scenarios and build unforgettable experiences.
 
-🎮 Join Georgia State Roleplay today and become part of an amazing ER:LC community!`)
+👑 Department Leadership
+Lead, inspire, and help shape the future of our server.
+
+🛡️ Staff Team Members
+Help maintain a fun, fair, and professional environment.
+
+💜 Server Boosters
+Exclusive rewards and recognition available for boosters!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🚔 YOUR SHIFT STARTS HERE 🚔
+
+Whether you're enforcing the law, saving lives, fighting fires, or keeping Georgia's roads moving, there's a place for you in our community.
+
+🎯 Join today and become part of Georgia's premier ER:LC roleplay server!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🔥 Professional Roleplay • Realistic Scenarios • Active Community • Endless Opportunities 🔥`)
       .setColor('Blue');
 
     const button = new ButtonBuilder()
       .setLabel('Join Server')
       .setStyle(ButtonStyle.Link)
-      .setURL('https://discord.gg/q9vnWpgS');
+      .setURL('https://discord.gg/8pcKgp7uR');
 
     const row = new ActionRowBuilder().addComponents(button);
 
