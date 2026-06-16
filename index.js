@@ -968,7 +968,7 @@ let roleToPing;
 if (interaction.values[0] === 'general') roleToPing = STAFF_ROLE_ID;
 if (interaction.values[0] === 'ia') roleToPing = '1505116650175987714';
 if (interaction.values[0] === 'partner') roleToPing = '1502708958182506616';
-
+content: `<@&${roleToPing}> <@${interaction.user.id}>`
 permissionOverwrites: [
 
 {
