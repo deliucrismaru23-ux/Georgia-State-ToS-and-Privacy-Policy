@@ -10,7 +10,6 @@ const {
     ButtonBuilder,
     ButtonStyle,
     ChannelType
-    require('dotenv').config();
 } = require('discord.js');
 
 const sqlite3 = require('sqlite3').verbose();
