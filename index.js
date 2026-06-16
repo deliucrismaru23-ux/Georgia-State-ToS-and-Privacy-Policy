@@ -1,4 +1,5 @@
 const {
+    require('dotenv').config();
     Client,
     GatewayIntentBits,
     PermissionsBitField,
