@@ -146,7 +146,7 @@ new SlashCommandBuilder()
 option
 .setName('amount')
 .setDescription('Amount')
-.setRequired(true))
+.setRequired(true)),
 
 new SlashCommandBuilder()
 .setName('ticket-panel')
