@@ -1,5 +1,11 @@
 require('dotenv').config();
 const {
+  StringSelectMenuBuilder,
+  StringSelectMenuOptionBuilder,
+  EmbedBuilder,
+  ActionRowBuilder,
+  ChannelType,
+  PermissionsBitField,
     Client,
     GatewayIntentBits,
     PermissionsBitField,
@@ -201,6 +207,68 @@ await registerCommands();
 // =====================
 
 client.on('interactionCreate', async interaction => {
+    if (interaction.isStringSelectMenu() && interaction.customId === 'ticket_select') {
+
+  let categoryName = '';
+  let staffMention = '';
+
+  if (interaction.values[0] === 'general') {
+    categoryName = 'general-support';
+  }
+
+  if (interaction.values[0] === 'ia') {
+    categoryName = 'internal-affairs';
+  }
+
+  if (interaction.values[0] === 'partner') {
+    categoryName = 'partnerships';
+  }
+
+  const existing = interaction.guild.channels.cache.find(
+    c => c.name === `ticket-${interaction.user.id}`
+  );
+
+  if (existing) {
+    return interaction.reply({
+      content: `❌ You already have a ticket: ${existing}`,
+      ephemeral: true
+    });
+  }
+
+  const channel = await interaction.guild.channels.create({
+    name: `ticket-${interaction.user.id}`,
+    type: ChannelType.GuildText,
+    permissionOverwrites: [
+      {
+        id: interaction.guild.id,
+        deny: [PermissionsBitField.Flags.ViewChannel]
+      },
+      {
+        id: interaction.user.id,
+        allow: [
+          PermissionsBitField.Flags.ViewChannel,
+          PermissionsBitField.Flags.SendMessages,
+          PermissionsBitField.Flags.ReadMessageHistory
+        ]
+      }
+    ]
+  });
+
+  const embed = new EmbedBuilder()
+    .setTitle('🎫 Ticket Opened')
+    .setDescription(`Category: **${categoryName}**\nPlease wait for staff.`)
+    .setColor('Green');
+
+  await channel.send({
+    content: `<@${interaction.user.id}>`,
+    embeds: [embed]
+  });
+
+  return interaction.reply({
+    content: `✅ Ticket created: ${channel}`,
+    ephemeral: true
+  });
+}
 
 if (!interaction.isChatInputCommand()) return;
 
@@ -742,45 +810,57 @@ ephemeral: true
 // TICKET PANEL
 // =====================
 
-if (
-interaction.commandName ===
-'ticket-panel'
-) {
+if (interaction.commandName === 'ticket-panel') {
 
-if (
-!interaction.member.permissions.has(
-PermissionsBitField.Flags.ManageChannels
-)
-) {
-return interaction.reply({
-content:
-'❌ Missing permissions.',
-ephemeral: true
-});
-}
+  if (!interaction.member.permissions.has(PermissionsBitField.Flags.ManageChannels)) {
+    return interaction.reply({
+      content: '❌ Missing permissions.',
+      ephemeral: true
+    });
+  }
 
-const embed = new EmbedBuilder()
-.setTitle('🎫 Support Tickets')
-.setDescription(
-'Press the button below to open a support ticket.'
-)
-.setColor('Blue');
+  const embed = new EmbedBuilder()
+    .setTitle('🎫 Open a Ticket!')
+    .setDescription(
+      `Use one of the tickets provided below!\n\n` +
+      `**General Support**\nFor:\n• Questions\n• Non priority complaints\n\n` +
+      `**Internal Affairs**\nFor:\n• Reporting a Staff Member\n• Hacking/Exploiting\n\n` +
+      `**Partnerships**\nFor:\n• Partnerships\n\n` +
+      `Powered by Georgia State Roleplay`
+    )
+    .setColor('Blue')
+    .setImage('attachment://banner.png');
 
-const button =
-new ButtonBuilder()
-.setCustomId('create_ticket')
-.setLabel('Create Ticket')
-.setStyle(ButtonStyle.Success);
+  const menu = new StringSelectMenuBuilder()
+    .setCustomId('ticket_select')
+    .setPlaceholder('Select a ticket category...')
+    .addOptions(
+      new StringSelectMenuOptionBuilder()
+        .setLabel('General Support')
+        .setDescription('Questions / General complaints')
+        .setValue('general'),
 
-const row =
-new ActionRowBuilder()
-.addComponents(button);
+      new StringSelectMenuOptionBuilder()
+        .setLabel('Internal Affairs')
+        .setDescription('Report staff / Exploits')
+        .setValue('ia'),
 
-return interaction.reply({
-embeds: [embed],
-components: [row]
-});
+      new StringSelectMenuOptionBuilder()
+        .setLabel('Partnerships')
+        .setDescription('Business partnerships')
+        .setValue('partner')
+    );
 
+  const row = new ActionRowBuilder().addComponents(menu);
+
+  return interaction.reply({
+    embeds: [embed],
+    components: [row],
+    files: [{
+      attachment: '/mnt/data/6063be25-d15d-4d5c-899f-98678cb6e3c9b0d.png',
+      name: 'banner.png'
+    }]
+  });
 }
 // =====================
 // CLOSE TICKET COMMAND
