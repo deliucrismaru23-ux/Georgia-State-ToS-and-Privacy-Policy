@@ -1027,8 +1027,12 @@ new EmbedBuilder()
 .setColor('Green');
 
 await channel.send({
-  content: `<@${interaction.user.id}> <@&${STAFF_ROLE_ID}>`,
-  embeds: [embed]
+  content: `<@&${STAFF_ROLE_ID}> <@${interaction.user.id}>`,
+  embeds: [embed],
+  allowedMentions: {
+    roles: [STAFF_ROLE_ID],
+    users: [interaction.user.id]
+  }
 });
 
 await interaction.reply({
