@@ -1000,7 +1000,6 @@ allow: [
 
 ]
 }
-);
 
 const closeButton =
 new ButtonBuilder()
