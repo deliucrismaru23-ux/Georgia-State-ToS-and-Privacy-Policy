@@ -6,17 +6,13 @@ const {
   ActionRowBuilder,
   ChannelType,
   PermissionsBitField,
-    Client,
-    GatewayIntentBits,
-    PermissionsBitField,
-    EmbedBuilder,
-    SlashCommandBuilder,
-    REST,
-    Routes,
-    ActionRowBuilder,
-    ButtonBuilder,
-    ButtonStyle,
-    ChannelType
+  Client,
+  GatewayIntentBits,
+  SlashCommandBuilder,
+  REST,
+  Routes,
+  ButtonBuilder,
+  ButtonStyle
 } = require('discord.js');
 
 const sqlite3 = require('sqlite3').verbose();
