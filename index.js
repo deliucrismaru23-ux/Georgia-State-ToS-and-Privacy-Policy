@@ -1020,7 +1020,7 @@ const embed =
 new EmbedBuilder()
 .setTitle('🎫 Ticket Created')
 .setDescription(
-'Please describe your issue and wait for staff.'
+'Thank you for opening a ticket. Please wait for a staff member to help you. Sincerely Georgia State Roleplay.'
 )
 .setColor('Green');
 
@@ -1034,12 +1034,9 @@ await channel.send({
 });
 
 await interaction.reply({
-content:
-`✅ Ticket created: ${channel}`,
-ephemeral: true
+  content: `✅ Ticket created: ${channel}`,
+  ephemeral: true
 });
-
-}
 
 // =====================
 // CLOSE BUTTON
