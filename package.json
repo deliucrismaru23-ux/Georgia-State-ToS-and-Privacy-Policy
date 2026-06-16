@@ -4,7 +4,7 @@
   "description": "Georgia State Roleplay Discord Bot",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node src/index.js"
   },
   "keywords": [
     "discord",
