@@ -815,17 +815,17 @@ if (interaction.commandName === 'ticket-panel') {
     });
   }
 
-  const embed = new EmbedBuilder()
-    .setTitle('🎫 Open a Ticket!')
-    .setDescription(
-      `Use one of the tickets provided below!\n\n` +
-      `**General Support**\nFor:\n• Questions\n• Non priority complaints\n\n` +
-      `**Internal Affairs**\nFor:\n• Reporting a Staff Member\n• Hacking/Exploiting\n\n` +
-      `**Partnerships**\nFor:\n• Partnerships\n\n` +
-      `Powered by Georgia State Roleplay`
-    )
-    .setColor('Blue')
-    .setImage('attachment://banner.png');
+const embed = new EmbedBuilder()
+  .setTitle('🎫 Open a Ticket!')
+  .setDescription(
+    `Use one of the tickets provided below!\n\n` +
+    `**General Support**\nFor:\n• Questions\n• Non priority complaints\n\n` +
+    `**Internal Affairs**\nFor:\n• Reporting a Staff Member\n• Hacking/Exploiting\n\n` +
+    `**Partnerships**\nFor:\n• Partnerships\n\n` +
+    `Powered by Georgia State Roleplay`
+  )
+  .setColor('Blue')
+  .setImage('https://cdn.discordapp.com/attachments/1509267092824915988/1516399635692785694/Tickets.png?ex=6a3280b6&is=6a312f36&hm=802d9f2e8d8fdc4a22eefc694ce376c7fa2b4398e49c6de57bbedae137e9a881');
 
   const menu = new StringSelectMenuBuilder()
     .setCustomId('ticket_select')
@@ -852,10 +852,6 @@ if (interaction.commandName === 'ticket-panel') {
   return interaction.reply({
     embeds: [embed],
     components: [row],
-    files: [{
-      attachment: '/mnt/data/6063be25-d15d-4d5c-899f-98678cb6e3c9b0d.png',
-      name: 'banner.png'
-    }]
   });
 }
 // =====================
